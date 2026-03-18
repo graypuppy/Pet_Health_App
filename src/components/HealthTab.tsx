@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Calendar, FileText, Activity, Plus, Clock } from 'lucide-react';
+import { usePet } from '../contexts/PetContext';
 
 const weightData = [
   { name: '10月', weight: 28.5 },
@@ -14,11 +15,18 @@ const weightData = [
 
 export default function HealthTab() {
   const [activeSegment, setActiveSegment] = useState('overview');
+  const { currentPet } = usePet();
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
       <header className="bg-white px-4 pt-12 pb-4 shadow-sm z-10 sticky top-0">
-        <h1 className="text-2xl font-bold text-gray-900">健康管理</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-gray-900">健康管理</h1>
+          <div className="flex items-center space-x-2 bg-emerald-50 px-3 py-1.5 rounded-full">
+            <img src={currentPet?.avatar} alt={currentPet?.name} className="w-6 h-6 rounded-full object-cover" referrerPolicy="no-referrer" />
+            <span className="text-sm font-bold text-emerald-700">{currentPet?.name}</span>
+          </div>
+        </div>
         <div className="flex space-x-2 mt-4 bg-gray-100 p-1 rounded-xl">
           <button 
             className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${activeSegment === 'overview' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
@@ -51,7 +59,7 @@ export default function HealthTab() {
                   <Activity size={18} className="mr-2 text-emerald-500" />
                   体重趋势 (kg)
                 </h2>
-                <span className="text-emerald-600 font-bold text-lg">29.3</span>
+                <span className="text-emerald-600 font-bold text-lg">{currentPet?.weight}</span>
               </div>
               <div className="h-48 w-full">
                 <ResponsiveContainer width="100%" height="100%">

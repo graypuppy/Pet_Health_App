@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { User, Settings, FileText, Heart, Bell, ChevronRight, LogOut } from 'lucide-react';
+import { usePet } from '../contexts/PetContext';
 
 export default function ProfileTab() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const { currentPet } = usePet();
 
   if (!isLoggedIn) {
     return (
@@ -42,7 +44,7 @@ export default function ProfileTab() {
             referrerPolicy="no-referrer"
           />
           <div>
-            <h2 className="text-xl font-bold text-white">Max妈妈</h2>
+            <h2 className="text-xl font-bold text-white">{currentPet?.name}妈妈</h2>
             <p className="text-emerald-100 text-sm mt-1">ID: 8847291</p>
           </div>
         </div>
