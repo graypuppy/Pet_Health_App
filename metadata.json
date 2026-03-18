@@ -1,0 +1,9 @@
+{
+  "name": "Pet Health App",
+  "description": "A comprehensive pet health management app providing health records, AI consultation, community, and more.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
